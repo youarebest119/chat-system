@@ -1,0 +1,54 @@
+@import "../../../../assets/theme/_var.scss";
+
+.user_inbox {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    align-items: center;
+    min-height: 100vh;
+
+    aside {
+        max-width: 280px;
+        width: 100%;
+        background-color: #ddd;
+        border-radius: 8px;
+        max-height: 100vh;
+        overflow: auto;
+        padding: 8px;
+
+        ul {
+            height: 100%;
+
+            li {
+                margin-bottom: 1px;
+
+                :global {
+                    a {
+                        display: flex;
+                        align-items: center;
+                        padding: 10px;
+
+                        img {
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 50%;
+                            background-color: #ccc;
+                            padding: 4px;
+                            flex-shrink: 0;
+                            margin-right: 8px;
+                        }
+
+                        p {
+                            font-size: 14px;
+                        }
+
+                        &.active,
+                        &:hover {
+                            background-color: #eee;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
