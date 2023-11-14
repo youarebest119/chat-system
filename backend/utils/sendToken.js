@@ -8,6 +8,7 @@ exports.sendToken = (user, res) => {
     }).json({
         success: true,
         token,
-        user,
+        data: user,
+        message: "user logged in",
     })
 }

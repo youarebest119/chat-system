@@ -6,13 +6,16 @@ import Register from './components/pages/public/Register/Register';
 import ChatPage from './components/pages/private/ChatPage/ChatPage';
 import { ROUTES } from './utils/constants';
 import UserInbox from './components/pages/private/UserInbox/UserInbox';
+import AuthGaurd from './components/gaurds/AuthGaurd';
+import NoGaurd from './components/gaurds/NoGaurd';
+import AuthLayout from './components/layouts/AuthLayout/AuthLayout';
 
 const Application = () => {
 
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Homelayout />,
+            element: <NoGaurd><Homelayout /></NoGaurd>,
             children: [
                 {
                     index: true,
@@ -25,16 +28,22 @@ const Application = () => {
             ]
         },
         {
-            path: ROUTES.INBOX,
-            element: <ChatPage />,
+            path: ROUTES.AUTH,
+            element: <AuthGaurd><AuthLayout /></AuthGaurd>,
             children: [
                 {
-                    path: ROUTES.INBOX_USER,
-                    element: <UserInbox />,
+                    path: ROUTES.INBOX,
+                    element: <><ChatPage /></>,
+                    children: [
+                        {
+                            path: ROUTES.INBOX_USER,
+                            element: <UserInbox />,
+                        }
+                    ],
                 }
-            ],
+            ]
         }
-    ]);
+    ])
 
     return (
         <>

@@ -1,0 +1,11 @@
+@import "../../../assets/theme/_var.scss";
+
+.button {
+    :global {
+        .spinner-border {
+            width: 20px;
+            height: 20px;
+            border-width: 2px;
+        }
+    }
+}

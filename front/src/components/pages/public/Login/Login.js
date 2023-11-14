@@ -1,24 +1,33 @@
-import { Form, Formik } from 'formik'
-import React from 'react'
-import { Card } from 'react-bootstrap'
-import Input from '../../../common/Formik/Input/Input'
-import Button from '../../../common/Button/Button'
+import { Form, Formik } from 'formik';
+import React from 'react';
+import { Card } from 'react-bootstrap';
+import Input from '../../../common/Formik/Input/Input';
+// import Button from '../../../common/Button/Button'
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from "yup";
-import { Link, useNavigate } from 'react-router-dom'
-import { ROUTES } from '../../../../utils/constants'
+import { AXIOS_POST } from '../../../../utils/axios';
+import { API_URL, ROUTES } from '../../../../utils/constants';
+import Button from '../../../common/Button/Button';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../../redux/features/user.slice';
 
 const Login = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const validationSchema = Yup.object({
-        username: Yup.string().required().min(6),
-        password: Yup.string().required().min(6),
+        // username: Yup.string().required().min(6),
+        // password: Yup.string().required().min(6),
     })
     const initialValues = {
         username: "",
         password: "",
     }
-    const handleSubmit = values => {
-        navigate(ROUTES.INBOX);
+    const handleSubmit = async values => {
+        let response = await AXIOS_POST(API_URL.USER.LOGIN, values)
+        console.log('response.data', response.data);
+        dispatch(setUser({ ...response.data.data }));
+        localStorage.setItem("token", response.data.token);
+        navigate(ROUTES.INBOX)
     }
     return (
         <>

@@ -3,11 +3,13 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import Input from '../../../common/Formik/Input/Input'
 import Button from '../../../common/Button/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
-import { ROUTES } from '../../../../utils/constants'
+import { API_URL, ROUTES } from '../../../../utils/constants'
+import { AXIOS_POST } from '../../../../utils/axios'
 
 const Register = () => {
+    const navigate = useNavigate();
     const validationSchema = Yup.object({
         username: Yup.string().required().min(6),
         password: Yup.string().required().min(6),
@@ -18,8 +20,9 @@ const Register = () => {
         password: "",
         confirmPassword: "",
     }
-    const handleSubmit = values => {
-
+    const handleSubmit = async values => {
+        let response = await AXIOS_POST(API_URL.USER.REGISTER, values)
+        navigate(ROUTES.LOGIN)
     }
     return (
         <>

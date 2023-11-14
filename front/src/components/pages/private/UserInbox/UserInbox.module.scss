@@ -12,9 +12,16 @@
         border-radius: 8px;
         padding: 30px 40px;
         position: relative;
+        display: flex;
         overflow: auto;
+        flex-direction: column;
+        // justify-content: flex-end;
 
         li {
+            &:first-child {
+                margin-top: auto;
+            }
+
             &:not(:last-child) {
                 margin-bottom: 10px;
             }
@@ -37,12 +44,28 @@
             }
 
             &.sent {
+                position: relative;
 
                 p {
                     margin-left: auto;
                     max-width: 60%;
                     text-align: right;
                     background-color: #1e14583a;
+                }
+
+                .delete_btn {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 24px;
+                    transform: translate(100%, 0%);
+                    height: 24px;
+
+                    svg {
+                        path {
+                            fill: red;
+                        }
+                    }
                 }
             }
         }
